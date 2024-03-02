@@ -1,0 +1,18 @@
+
+    <!--  // scripte im head definieren und im body aufrufen.
+    wenn in einer anderen Datei dann : <script src (quelle) ="dateiname.js">script
+        Link einfügen:
+        <a href="hier den Link"> name des Wortes was aufleuten soll </a>
+        bild einfügen:
+        <img src="bildnamen" alt="schalte deine Bilder an!" widht="xxx" height="xxx">
+        
+        <form>
+        vorname:<input type="text" name="vorname"><br/>
+        Nachname:<input type="text" name="Nachname"><br/>
+        </form>
+        erstellt ein Feld für inputs
+    css :
+    neue Datei mit .css am ende. href"dateiname.css" in diesem fall style3.css
+     IDs werden mit # angesprochen klassen mit .
+     IDs binden stärker als Klassen, Klassen binden stärker als keine freie variablen
+
