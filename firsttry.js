@@ -1,4 +1,4 @@
-var zeichen = ["Hans"];
+var zeichen = ["asd"];
 var textElement = document.getElementById("text");
 
 // Überprüfe die Anzahl der Zeichen

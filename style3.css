@@ -1,8 +1,41 @@
-.rot {
-  color: red;
+body
+{
+  margin: 0;
+
+}
+ul
+{
+list-style-type: none;
+margin: 0;
+padding: 0;
+width: 10%;
+background-color: #D0D0D0;
+position: fixed;
+height: 100%;
+overflow: auto;
 }
 
-.gruen {
-  color: green;
+li a 
+{
+  display: block;
+  color: blueviolet;
+  padding: 5px 5px 10px 10px;
+  text-decoration: none;
+}
+li a.aktiv
+{ 
+  background: #500000;
+  color:rgb(45, 243, 5);
+}
+li a:hover:not(.aktiv)
+{
+  background-color: #808080;
+  color:white;
 }
 
+#div1
+ {
+  margin-left: 10%;
+  padding: 10px 10px;
+  height: 100%;
+}
