@@ -9,3 +9,9 @@ if (zeichen.length >= 2) {
   // Färbe den Text grün
   textElement.classList.add("gruen");
 }
+
+function output1(n){
+
+  window.alert(n);
+
+}
