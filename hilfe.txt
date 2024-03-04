@@ -15,4 +15,21 @@
     neue Datei mit .css am ende. href"dateiname.css" in diesem fall style3.css
      IDs werden mit # angesprochen klassen mit .
      IDs binden stärker als Klassen, Klassen binden stärker als keine freie variablen
+    links einbetten : a:link { color: red} mach unbenutzte Links rot
+    a:visitied  { color: green} links werden grün wenn sie besucht wurden
+    a:hover { font-size: 00px} erhöht beim hovern den Link
+    reihenfolge beachten : link/vistited -> hover->aktiv
 
+
+    DOM :
+    document.befehle :
+    document.getElementById(Die ID der Headline, des paragraphen ect. ähnlich wie ,,vererben")
+    vorteil : dynamisch während der Laufzeit dinge verändern.
+    var x = document.getElementsByTagName("h"/"p");  x beinhaltet dann alle tags von p oder h. (Array)
+    x[0].innerHTML gibt den ersten p aus, x[1].innerHTML den zweiten ect.
+    document.body für den gesamten Body.
+    document.anchors für alle a,p,h ect.
+    document.documentElement
+    document.head
+    document.title
+    ect.
