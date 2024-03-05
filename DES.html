@@ -1,20 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Der Data Encryption standard</title>
     <link rel="stylesheet" type="text/css" href="DES.css">
     <script src="DES.js"></script>
 </head>
 <body>
     <ul>
-        <li><a href="Site.html">Startseite</a></li>
+        <li><a href="morpheus.html">Startseite</a></li>
         <li><a class="aktiv" href="DES.html">DES-verschlüsselung</a></li>
         <li><a href="AES.html">AES-verschlüsselung</a></li>
       </ul>
     <div id="div1">
         <h1 id="headline" > Der Data Encryption Standard</h1>
         <p>Hier soll der DES mal Grafisch dargestellt werden.</p>
-        <script>kästchen();</script>
     </div>
+    <svg id="svgContainer" width="1600" heigt="600"></svg>
+
+    <script>
+        function zeichneRechtecke(startX,startY) {
+            for ( i = 0; i < Links.length; i++)
+            {
+                let rechteck = Links[i];
+                let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                 // Setze die Attribute des Rechtecks
+            svgRect.setAttribute("x", startX + rechteck.x);
+            svgRect.setAttribute("y", startY + rechteck.y);
+            svgRect.setAttribute("width", rechteck.breite);
+            svgRect.setAttribute("height", rechteck.hoehe);
+            svgRect.setAttribute("fill", rechteck.farbe);
+            // Füge das Rechteck dem SVG-Container auf der Webseite hinzu
+            document.getElementById("svgContainer").appendChild(svgRect);
+            }
+            
+            for ( i = 0; i < Rechts.length; i++)
+            {
+                let rechteck = Rechts[i];
+                let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                 // Setze die Attribute des Rechtecks
+            svgRect.setAttribute("x", startX + rechteck.x);
+            svgRect.setAttribute("y", startY + rechteck.y);
+            svgRect.setAttribute("width", rechteck.breite);
+            svgRect.setAttribute("height", rechteck.hoehe);
+            svgRect.setAttribute("fill", rechteck.farbe);
+            // Füge das Rechteck dem SVG-Container auf der Webseite hinzu
+            document.getElementById("svgContainer").appendChild(svgRect);
+            }
+
+        }
+     
+
+
+
+
+    zeichneRechtecke(200, 20); // Startpunkt für die erste Reihe: startX = 200, startY = 20
+
+    </script>
+
 </body>
 </html>
