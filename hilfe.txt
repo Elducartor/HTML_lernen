@@ -33,3 +33,18 @@
     document.head
     document.title
     ect.
+
+
+    meinEvent(element) { element.innerHTML ="xxx"} //  funktion mit (this) aufrufen um sie immer wieder zu verwerden, z.b. Bei onClick.
+    var b = document.body
+    x = b.childNodes // wie bei einer Baumstrucktur. x ist ein Array!
+
+    window Befehle (BOM) : window.prompt für input abfragen.
+    Cookies: 
+     if navigator.cookieEnabled
+
+     document.cookie = "isread=true; expires=Fri, 4 nov 2016 12:00:00UTC"; path=/ // Datum wann das Datum gelöscht wird.
+
+     var,let und const: 
+     var = Blockscope, let = funktionscope, const = Konstant für das Dokument, der Wert wird kann nicht geändert werden.
+     
