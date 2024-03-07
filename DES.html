@@ -30,7 +30,11 @@
             svgRect.setAttribute("y", startY + rechteck.y);
             svgRect.setAttribute("width", rechteck.breite);
             svgRect.setAttribute("height", rechteck.hoehe);
-            svgRect.setAttribute("fill", "white");
+            if (rechteck.farbe === "white")
+            {
+            svgRect.setAttribute("fill", rechteck.farbe);
+            }
+            else { svgRect.setAttribute("fill", "red");}
             svgRect.setAttribute("onclick", `aendereFarbe(${i}, 'red')`);
             // die Bits aus der Eingabe in die Kästchen verteilen.
             let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
@@ -55,13 +59,18 @@
        document.getElementById("svgContainer").children[index * 2].setAttribute("fill", gesamt[index].farbe);
        if (document.getElementById("svgContainer").children[index * 2 + 1].textContent == "0") {
         document.getElementById("svgContainer").children[index * 2 + 1].textContent = "1";
+        binArray[index] = 1;
     } else {
         document.getElementById("svgContainer").children[index * 2 + 1].textContent = "0";
-    }
+        binArray[index] = 0;
+    }   
     }
         
     function buttonClicked() {
-      //  aufspalten(); window.alert(Links[1].textContent);
+        window.alert(gesamt[0].x);
+        E_permutation2(Eingangspermutation,binArray);
+        window.alert(gesamt[0].x);
+        zeichneRechtecke(200, 40);
     }</script>
     <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
     <input type="text" id="meinInput" name="meinInput" placeholder="Bitte die Eingangsbits eingeben.">
