@@ -33,7 +33,6 @@ for (let i = 0; i < anzahl_rechtecke; i++) {
     if (i < anzahl_rechtecke/2) {gesamt.push(Rechtecke(xPosition,20,rechteckBreite,rechteckHoehe,"white"));}
     else {gesamt.push(Rechtecke(xPosition2,60,rechteckBreite,rechteckHoehe,"white"));}
 }
-console.log(gesamt[57]);
 let binArray = [];
 function Eingabe_zu_bin(hex)
 {
@@ -52,33 +51,32 @@ function Eingabe_zu_bin(hex)
 }
 // Kommt nach dem EIngang vor der ersten Runde.
 Eingangspermutation = [
-    58,50,42,34,26,18,10,2,
-    60,52,44,36,28,20,12,4,
-    62,54,46,38,30,22,14,6,
-    64,56,48,40,32,24,16,8,
     57,49,41,33,25,17,9,1,
     59,51,43,35,27,19,11,3,
     61,53,45,37,29,21,13,5,
-    63,55,47,39,31,23,15,7
+    63,55,47,39,31,23,15,7,
+    56,48,40,32,24,16,8,0,
+    58,50,42,34,26,18,10,2,
+    60,52,44,36,28,20,12,4,
+    62,54,46,38,30,22,14,6
 ];
 
-function E_permutation2(Eingangspermutation,binArray)
-{   
+ if (gesamt.length >= 1){
+    let gesamtCopy = [];
     let BinCopy = [];
     let Container = document.getElementById("svgContainer");
-    let gesamtCopy = [];
     while (Container.firstChild) {
         Container.removeChild(Container.firstChild);
     }
     for(let i = 0;i < Eingangspermutation.length;i++)
     {
-        gesamtCopy.push(gesamt[Eingangspermutation[i]-1]);
-        BinCopy.push(binArray[Eingangspermutation[i]-1]);
+        gesamtCopy.push(gesamt[Eingangspermutation[i]]);
+        BinCopy.push(binArray[Eingangspermutation[i]]);
     }
 
-   gesamt = [...gesamtCopy];
-   binArray = [...BinCopy];
-}
+    gesamt = [...gesamtCopy];
+    binArray = [...BinCopy];
+ }
 // kommt vor dem Output des DES
 Ausgangspermutation = [
     40,8,48,16,56,24,64,32,

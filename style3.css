@@ -1,18 +1,19 @@
 body
 {
   margin: 0;
-
+  background-color: rgb(59, 56, 56);
+  color: white;
 }
 ul
 {
-list-style-type: none;
-margin: 0;
-padding: 0;
-width: 10%;
-background-color: #D0D0D0;
-position: fixed;
-height: 100%;
-overflow: auto;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 10%;
+  background-color: #300303;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
 li a 

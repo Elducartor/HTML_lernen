@@ -17,7 +17,7 @@
         <p>Hier wird der DES grafisch dargestellt. Du kannst ein Kästchen (Bit) anklicken um es zu markieren. <br> 
         Das kann dau dienen um herauszufinden wie sich die Bits gegenseitig beeinflussen.</p>
     </div>
-    <svg id="svgContainer" width="1600" height="600"></svg>
+    <svg id="svgContainer" width="100vw" height="100vh"></svg>
 
     <script>
         function zeichneRechtecke(startX,startY) {
@@ -49,8 +49,9 @@
             document.getElementById("svgContainer").appendChild(svgRect);
             document.getElementById("svgContainer").appendChild(svgText);
             }
-
         }
+
+
      
     function aendereFarbe(index,farbe){
         if (gesamt[index].farbe !== farbe)
@@ -67,10 +68,8 @@
     }
         
     function buttonClicked() {
-        window.alert(gesamt[0].x);
-        E_permutation2(Eingangspermutation,binArray);
-        window.alert(gesamt[0].x);
-        zeichneRechtecke(200, 40);
+   //todo
+
     }</script>
     <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
     <input type="text" id="meinInput" name="meinInput" placeholder="Bitte die Eingangsbits eingeben.">
@@ -82,9 +81,10 @@
     Eingabe_zu_bin(Klartext)
     document.getElementById("erster_button").style.display = "block";
     zeichneRechtecke(200, 20); 
+
     }
     Eingang.addEventListener("keypress", function(event){if (event.key == "Enter"){eingabe();}});
     
-    </script>
+  </script>
 </body>
 </html>
