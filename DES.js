@@ -91,39 +91,36 @@ Eingangspermutation = [
     62,54,46,38,30,22,14,6
 ];
 
- function E_perm(Eingangspermutation,binArray)
- {
-    let BinCopy = [];
-    let gesamtCopy = [];
+function buttonClicked() 
+{
 
-    for(let A = 0;A < Eingangspermutation.length;A++)
+    let svgContainer = document.getElementById("svgContainer");
+while (svgContainer.firstChild) {
+svgContainer.removeChild(svgContainer.firstChild);
+}
+let BinCopy = [];
+let gesamtCopy = [];
+for(let A = 0;A < Eingangspermutation.length;A++)
+{
+gesamtCopy.push(gesamt[Eingangspermutation[A]]);
+BinCopy.push(binArray[Eingangspermutation[A]]);
+}
+
+let EEE = [...BinCopy];
+for ( i = 0; i < gesamt.length; i++)
     {
-        gesamtCopy.push(gesamt[Eingangspermutation[A]]);
-        BinCopy.push(binArray[Eingangspermutation[A]]);
-    }
-
-    let EEE = BinCopy;
-    let XYX = gesamtCopy;
-
-    for ( i = 0; i < XYX.length; i++)
-    {
-        let rechteck = XYX[i];
+        let rechteck = gesamt[i];
         let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
          // Setze die Attribute des Rechtecks
     svgRect.setAttribute("x", 200 + gesamt[i].x);
-    svgRect.setAttribute("y", 100 + gesamt[i].y);
+    svgRect.setAttribute("y", 20 + gesamt[i].y);
     svgRect.setAttribute("width", rechteck.breite);
     svgRect.setAttribute("height", rechteck.hoehe);
-    if (rechteck.farbe === "white")
-    {
-    svgRect.setAttribute("fill", rechteck.farbe);
-    }
-    else { svgRect.setAttribute("fill", "red");}
-    svgRect.setAttribute("onclick", `aendereFarbe(${i}, 'red')`);
+    svgRect.setAttribute("fill", gesamt[Eingangspermutation[i]].farbe);
     // die Bits aus der Eingabe in die Kästchen verteilen.
     let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
     svgText.setAttribute("x",200 + gesamt[i].x + rechteck.breite /2);
-    svgText.setAttribute("y",100 + gesamt[i].y + rechteck.hoehe /2);
+    svgText.setAttribute("y",20 + gesamt[i].y + rechteck.hoehe /2);
     svgText.setAttribute("text-anchor","middle");
     svgText.setAttribute("alignment-baseline","middle");
     svgText.textContent = EEE[i]; // setzt den Text nach den Bits im Array.
@@ -133,7 +130,6 @@ Eingangspermutation = [
     document.getElementById("svgContainer").appendChild(svgRect);
     document.getElementById("svgContainer").appendChild(svgText);
     }
-    
 }
 // kommt vor dem Output des DES
 Ausgangspermutation = [

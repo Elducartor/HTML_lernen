@@ -37,49 +37,7 @@
         
    
     </script>
-    <script>
-        function buttonClicked() 
-{
-
-    let svgContainer = document.getElementById("svgContainer");
-while (svgContainer.firstChild) {
-svgContainer.removeChild(svgContainer.firstChild);
-}
-let BinCopy = [];
-let gesamtCopy = [];
-for(let A = 0;A < Eingangspermutation.length;A++)
-{
-gesamtCopy.push(gesamt[Eingangspermutation[A]]);
-BinCopy.push(binArray[Eingangspermutation[A]]);
-}
-
-let EEE = [...BinCopy];
-for ( i = 0; i < gesamt.length; i++)
-    {
-        let rechteck = gesamt[i];
-        let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-         // Setze die Attribute des Rechtecks
-    svgRect.setAttribute("x", 200 + gesamt[i].x);
-    svgRect.setAttribute("y", 100 + gesamt[i].y);
-    svgRect.setAttribute("width", rechteck.breite);
-    svgRect.setAttribute("height", rechteck.hoehe);
-    svgRect.setAttribute("fill", gesamt[Eingangspermutation[i]].farbe);
-    // die Bits aus der Eingabe in die Kästchen verteilen.
-    let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
-    svgText.setAttribute("x",200 + gesamt[i].x + rechteck.breite /2);
-    svgText.setAttribute("y",100 + gesamt[i].y + rechteck.hoehe /2);
-    svgText.setAttribute("text-anchor","middle");
-    svgText.setAttribute("alignment-baseline","middle");
-    svgText.textContent = EEE[i]; // setzt den Text nach den Bits im Array.
-
-
-
-    document.getElementById("svgContainer").appendChild(svgRect);
-    document.getElementById("svgContainer").appendChild(svgText);
-    }
-}
-    </script>
-    <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
+    <button id ="erster_button" onClick="buttendrücken()">Weiter</button>
     <input type="text" id="meinInput" name="meinInput" placeholder="Bitte die Eingangsbits eingeben.">
     <script>
     var Eingang = document.getElementById("meinInput");
@@ -91,5 +49,12 @@ for ( i = 0; i < gesamt.length; i++)
     Eingang.addEventListener("keypress", function(event){if (event.key == "Enter"){eingabe();}});
     
   </script>
+    <script>
+    function buttendrücken()
+    {
+        buttonClicked();
+        document.getElementById("erster_button").style.display = "none";
+    }
+    </script>
 </body>
 </html>

@@ -46,17 +46,17 @@ li a:hover:not(.aktiv)
   margin-top: 10px;
   background-color: #034d10;
   color: #ffffff;
-  position: fixed;
   top: 280px;
   left: 350px;
-  display: none;
+  display:none;
+  position: absolute;
 }
 
 #meinInput
 {
   margin-top: 10px;
   margin-bottom: 10px;
-  position: fixed;
+  position: absolute;
   top: 150px;
   left: 350px;
 }
