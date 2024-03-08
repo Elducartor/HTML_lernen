@@ -49,6 +49,36 @@ function Eingabe_zu_bin(hex)
     
     }
 }
+function zeichneRechtecke(startX,startY,Array1,Array2) {
+    for ( i = 0; i < Array1.length; i++)
+    {
+        let rechteck = Array1[i];
+        let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+         // Setze die Attribute des Rechtecks
+    svgRect.setAttribute("x", startX + rechteck.x);
+    svgRect.setAttribute("y", startY + rechteck.y);
+    svgRect.setAttribute("width", rechteck.breite);
+    svgRect.setAttribute("height", rechteck.hoehe);
+    if (rechteck.farbe === "white")
+    {
+    svgRect.setAttribute("fill", rechteck.farbe);
+    }
+    else { svgRect.setAttribute("fill", "red");}
+    svgRect.setAttribute("onclick", `aendereFarbe(${i}, 'red')`);
+    // die Bits aus der Eingabe in die Kästchen verteilen.
+    let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
+    svgText.setAttribute("x",startX + rechteck.x + rechteck.breite /2);
+    svgText.setAttribute("y",startY + rechteck.y + rechteck.hoehe /2);
+    svgText.setAttribute("text-anchor","middle");
+    svgText.setAttribute("alignment-baseline","middle");
+    svgText.textContent = Array2[i]; // setzt den Text nach den Bits im Array.
+
+
+
+    document.getElementById("svgContainer").appendChild(svgRect);
+    document.getElementById("svgContainer").appendChild(svgText);
+    }
+}
 // Kommt nach dem EIngang vor der ersten Runde.
 Eingangspermutation = [
     57,49,41,33,25,17,9,1,
@@ -61,22 +91,50 @@ Eingangspermutation = [
     62,54,46,38,30,22,14,6
 ];
 
- if (gesamt.length >= 1){
-    let gesamtCopy = [];
+ function E_perm(Eingangspermutation,binArray)
+ {
     let BinCopy = [];
-    let Container = document.getElementById("svgContainer");
-    while (Container.firstChild) {
-        Container.removeChild(Container.firstChild);
-    }
-    for(let i = 0;i < Eingangspermutation.length;i++)
+    let gesamtCopy = [];
+
+    for(let A = 0;A < Eingangspermutation.length;A++)
     {
-        gesamtCopy.push(gesamt[Eingangspermutation[i]]);
-        BinCopy.push(binArray[Eingangspermutation[i]]);
+        gesamtCopy.push(gesamt[Eingangspermutation[A]]);
+        BinCopy.push(binArray[Eingangspermutation[A]]);
     }
 
-    gesamt = [...gesamtCopy];
-    binArray = [...BinCopy];
- }
+    let EEE = BinCopy;
+    let XYX = gesamtCopy;
+
+    for ( i = 0; i < XYX.length; i++)
+    {
+        let rechteck = XYX[i];
+        let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+         // Setze die Attribute des Rechtecks
+    svgRect.setAttribute("x", 200 + gesamt[i].x);
+    svgRect.setAttribute("y", 100 + gesamt[i].y);
+    svgRect.setAttribute("width", rechteck.breite);
+    svgRect.setAttribute("height", rechteck.hoehe);
+    if (rechteck.farbe === "white")
+    {
+    svgRect.setAttribute("fill", rechteck.farbe);
+    }
+    else { svgRect.setAttribute("fill", "red");}
+    svgRect.setAttribute("onclick", `aendereFarbe(${i}, 'red')`);
+    // die Bits aus der Eingabe in die Kästchen verteilen.
+    let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
+    svgText.setAttribute("x",200 + gesamt[i].x + rechteck.breite /2);
+    svgText.setAttribute("y",100 + gesamt[i].y + rechteck.hoehe /2);
+    svgText.setAttribute("text-anchor","middle");
+    svgText.setAttribute("alignment-baseline","middle");
+    svgText.textContent = EEE[i]; // setzt den Text nach den Bits im Array.
+
+
+
+    document.getElementById("svgContainer").appendChild(svgRect);
+    document.getElementById("svgContainer").appendChild(svgText);
+    }
+    
+}
 // kommt vor dem Output des DES
 Ausgangspermutation = [
     40,8,48,16,56,24,64,32,
@@ -183,3 +241,4 @@ PC_2 = [
 51,45,33,48,44,49,39,56,
 34,53,46,42,50,36,29,32
 ];
+

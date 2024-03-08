@@ -18,41 +18,9 @@
         Das kann dau dienen um herauszufinden wie sich die Bits gegenseitig beeinflussen.</p>
     </div>
     <svg id="svgContainer" width="100vw" height="100vh"></svg>
+    <svg id="svgContainer1" width="100vw" height="100vh"></svg>
 
     <script>
-        function zeichneRechtecke(startX,startY) {
-            for ( i = 0; i < gesamt.length; i++)
-            {
-                let rechteck = gesamt[i];
-                let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-                 // Setze die Attribute des Rechtecks
-            svgRect.setAttribute("x", startX + rechteck.x);
-            svgRect.setAttribute("y", startY + rechteck.y);
-            svgRect.setAttribute("width", rechteck.breite);
-            svgRect.setAttribute("height", rechteck.hoehe);
-            if (rechteck.farbe === "white")
-            {
-            svgRect.setAttribute("fill", rechteck.farbe);
-            }
-            else { svgRect.setAttribute("fill", "red");}
-            svgRect.setAttribute("onclick", `aendereFarbe(${i}, 'red')`);
-            // die Bits aus der Eingabe in die Kästchen verteilen.
-            let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
-            svgText.setAttribute("x",startX + rechteck.x + rechteck.breite /2);
-            svgText.setAttribute("y",startY + rechteck.y + rechteck.hoehe /2);
-            svgText.setAttribute("text-anchor","middle");
-            svgText.setAttribute("alignment-baseline","middle");
-            svgText.textContent = binArray[i]; // setzt den Text nach den Bits im Array.
-
-
-
-            document.getElementById("svgContainer").appendChild(svgRect);
-            document.getElementById("svgContainer").appendChild(svgText);
-            }
-        }
-
-
-     
     function aendereFarbe(index,farbe){
         if (gesamt[index].farbe !== farbe)
        { gesamt[index].farbe = farbe;}
@@ -67,22 +35,59 @@
     }   
     }
         
-    function buttonClicked() {
-   //todo
+   
+    </script>
+    <script>
+        function buttonClicked() 
+{
 
-    }</script>
+    let svgContainer = document.getElementById("svgContainer");
+while (svgContainer.firstChild) {
+svgContainer.removeChild(svgContainer.firstChild);
+}
+let BinCopy = [];
+let gesamtCopy = [];
+for(let A = 0;A < Eingangspermutation.length;A++)
+{
+gesamtCopy.push(gesamt[Eingangspermutation[A]]);
+BinCopy.push(binArray[Eingangspermutation[A]]);
+}
+
+let EEE = [...BinCopy];
+for ( i = 0; i < gesamt.length; i++)
+    {
+        let rechteck = gesamt[i];
+        let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+         // Setze die Attribute des Rechtecks
+    svgRect.setAttribute("x", 200 + gesamt[i].x);
+    svgRect.setAttribute("y", 100 + gesamt[i].y);
+    svgRect.setAttribute("width", rechteck.breite);
+    svgRect.setAttribute("height", rechteck.hoehe);
+    svgRect.setAttribute("fill", gesamt[Eingangspermutation[i]].farbe);
+    // die Bits aus der Eingabe in die Kästchen verteilen.
+    let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
+    svgText.setAttribute("x",200 + gesamt[i].x + rechteck.breite /2);
+    svgText.setAttribute("y",100 + gesamt[i].y + rechteck.hoehe /2);
+    svgText.setAttribute("text-anchor","middle");
+    svgText.setAttribute("alignment-baseline","middle");
+    svgText.textContent = EEE[i]; // setzt den Text nach den Bits im Array.
+
+
+
+    document.getElementById("svgContainer").appendChild(svgRect);
+    document.getElementById("svgContainer").appendChild(svgText);
+    }
+}
+    </script>
     <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
     <input type="text" id="meinInput" name="meinInput" placeholder="Bitte die Eingangsbits eingeben.">
     <script>
-
     var Eingang = document.getElementById("meinInput");
     function eingabe() {
     var Klartext = Eingang.value;
     Eingabe_zu_bin(Klartext)
     document.getElementById("erster_button").style.display = "block";
-    zeichneRechtecke(200, 20); 
-
-    }
+    zeichneRechtecke(200, 20,gesamt,binArray); }
     Eingang.addEventListener("keypress", function(event){if (event.key == "Enter"){eingabe();}});
     
   </script>
