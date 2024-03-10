@@ -5,7 +5,80 @@ funktion erstellen die rechtecke erstellt. (SVG)
 die Kästchen mit einer for schleife zeichnen lassen
 
 */
+function drawRectangles(ctx, rects) {
+    for (let rect of rects) {
+        ctx.fillStyle = rect.color;
+        ctx.fillRect(rect.x,rect.y,rect.width,rect.height);
+    }
+}
 
+function RechteckWerte(i,widthx,heighty){
+        let x = i* (widthx + 5);
+        let y = heighty;
+        if (i >= 32)
+        {y = 40;
+        x = (i-32) *(widthx + 5);
+        }
+       
+        let width = widthx;
+        let height = heighty;
+        let color = "white";
+
+        return {x,y,width,height,color};
+}
+
+function RechteckeBauen(anzahl,widthx,heighty){
+    let RechteckArray = [];
+    for (let i = 0; i < anzahl;i++)
+    { 
+        RechteckArray.push(RechteckWerte(i,widthx,heighty))
+    }
+    return RechteckArray;
+}
+
+function Zeichnen(widthx,heighty){
+    document.addEventListener("DOMContentLoaded",function() {
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+
+    let rectangles = RechteckeBauen(64,10,10);
+    drawRectangles(ctx,rectangles);
+    console.log(drawRectangles(ctx,rectangles));
+
+});
+}
+function XXX() {
+    // JavaScript-Code, um auf das Canvas-Element zuzugreifen und darauf zu zeichnen
+    document.addEventListener("DOMContentLoaded", function() {
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d");
+        //Hintergrund
+        let xxx = canvas.getContext("2d");
+        let y = 50;
+        let x = 50;
+        function animate() {
+            // Vorherigen Inhalt des Canvas löschen
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            xxx.fillStyle = "grey";
+            xxx.fillRect(0, 0, 900, 400);
+            ctx.fillStyle= "red";
+            ctx.fillRect(x, y, 20, 20);
+            ctx.font = "10px Arial"; // Schriftgröße und -art festlegen
+            ctx.fillStyle = "black";
+            ctx.fillText("1", x + 5, y + 12); // Text "123" bei (x + 5, y + 15) zeichnen
+
+            // y-Koordinate inkrementieren (um das Rechteck nach unten laufen zu lassen)
+            y += 0.5;
+            // Überprüfen, ob das Rechteck den unteren Rand des Canvas erreicht hat
+            if (y <= canvas.height - 20) {
+                requestAnimationFrame(animate); // Animation fortsetzen
+            }
+        }
+
+        animate(); // Animation starten
+    });
+
+    }
 // Kommt nach dem EIngang vor der ersten Runde.
 Eingangspermutation = [
     57,49,41,33,25,17,9,1,
