@@ -5,80 +5,7 @@ funktion erstellen die rechtecke erstellt. (SVG)
 die Kästchen mit einer for schleife zeichnen lassen
 
 */
-let gesamt = [];
 
-function Rechtecke(x,y,breite,hoehe,farbe) {
-
-    let rechteck = {
-        x:x,
-        y:y,
-        hoehe : hoehe,
-        breite:breite,
-        farbe:farbe,
-
-    };
-
-    return rechteck;
-}
-
-var anzahl_rechtecke = 64;
-const rechteckBreite = 25;
-const rechteckHoehe = 25;
-
-// 64 rechtecke erstellen und in die Arrays packen.
-
-for (let i = 0; i < anzahl_rechtecke; i++) {
-    let xPosition = i * (rechteckBreite + 5);
-    let xPosition2 = (i-32) * (rechteckBreite+5);
-    if (i < anzahl_rechtecke/2) {gesamt.push(Rechtecke(xPosition,20,rechteckBreite,rechteckHoehe,"white"));}
-    else {gesamt.push(Rechtecke(xPosition2,60,rechteckBreite,rechteckHoehe,"white"));}
-}
-let binArray = [];
-function Eingabe_zu_bin(hex)
-{
-    for(let i = 0; i < hex.length;i++){
-    let binary = parseInt(hex[i], 16).toString(2);
-        // Fehlende Nullen voranstellen, um 4 Bits zu erhalten
-        while (binary.length < 4) {
-            binary = "0" + binary;
-        }
-        // Jedes Bit separat zum Array hinzufügen
-        for (let j = 0; j < binary.length; j++) {
-            binArray.push(parseInt(binary[j]));
-        }
-    
-    }
-}
-function zeichneRechtecke(startX,startY,Array1,Array2) {
-    for ( i = 0; i < Array1.length; i++)
-    {
-        let rechteck = Array1[i];
-        let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-         // Setze die Attribute des Rechtecks
-    svgRect.setAttribute("x", startX + rechteck.x);
-    svgRect.setAttribute("y", startY + rechteck.y);
-    svgRect.setAttribute("width", rechteck.breite);
-    svgRect.setAttribute("height", rechteck.hoehe);
-    if (rechteck.farbe === "white")
-    {
-    svgRect.setAttribute("fill", rechteck.farbe);
-    }
-    else { svgRect.setAttribute("fill", "red");}
-    svgRect.setAttribute("onclick", `aendereFarbe(${i}, 'red')`);
-    // die Bits aus der Eingabe in die Kästchen verteilen.
-    let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
-    svgText.setAttribute("x",startX + rechteck.x + rechteck.breite /2);
-    svgText.setAttribute("y",startY + rechteck.y + rechteck.hoehe /2);
-    svgText.setAttribute("text-anchor","middle");
-    svgText.setAttribute("alignment-baseline","middle");
-    svgText.textContent = Array2[i]; // setzt den Text nach den Bits im Array.
-
-
-
-    document.getElementById("svgContainer").appendChild(svgRect);
-    document.getElementById("svgContainer").appendChild(svgText);
-    }
-}
 // Kommt nach dem EIngang vor der ersten Runde.
 Eingangspermutation = [
     57,49,41,33,25,17,9,1,
@@ -91,46 +18,6 @@ Eingangspermutation = [
     62,54,46,38,30,22,14,6
 ];
 
-function buttonClicked() 
-{
-
-    let svgContainer = document.getElementById("svgContainer");
-while (svgContainer.firstChild) {
-svgContainer.removeChild(svgContainer.firstChild);
-}
-let BinCopy = [];
-let gesamtCopy = [];
-for(let A = 0;A < Eingangspermutation.length;A++)
-{
-gesamtCopy.push(gesamt[Eingangspermutation[A]]);
-BinCopy.push(binArray[Eingangspermutation[A]]);
-}
-
-let EEE = [...BinCopy];
-for ( i = 0; i < gesamt.length; i++)
-    {
-        let rechteck = gesamt[i];
-        let svgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-         // Setze die Attribute des Rechtecks
-    svgRect.setAttribute("x", 200 + gesamt[i].x);
-    svgRect.setAttribute("y", 20 + gesamt[i].y);
-    svgRect.setAttribute("width", rechteck.breite);
-    svgRect.setAttribute("height", rechteck.hoehe);
-    svgRect.setAttribute("fill", gesamt[Eingangspermutation[i]].farbe);
-    // die Bits aus der Eingabe in die Kästchen verteilen.
-    let svgText = document.createElementNS("http://www.w3.org/2000/svg", "text")
-    svgText.setAttribute("x",200 + gesamt[i].x + rechteck.breite /2);
-    svgText.setAttribute("y",20 + gesamt[i].y + rechteck.hoehe /2);
-    svgText.setAttribute("text-anchor","middle");
-    svgText.setAttribute("alignment-baseline","middle");
-    svgText.textContent = EEE[i]; // setzt den Text nach den Bits im Array.
-
-
-
-    document.getElementById("svgContainer").appendChild(svgRect);
-    document.getElementById("svgContainer").appendChild(svgText);
-    }
-}
 // kommt vor dem Output des DES
 Ausgangspermutation = [
     40,8,48,16,56,24,64,32,

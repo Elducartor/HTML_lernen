@@ -4,57 +4,50 @@
     <meta charset="UTF-8">
     <title>Der Data Encryption standard</title>
     <link rel="stylesheet" type="text/css" href="DES.css">
-    <script src="DES.js"></script>
 </head>
 <body>
     <ul>
         <li><a href="morpheus.html">Startseite</a></li>
         <li><a class="aktiv" href="DES.html">DES-verschlüsselung</a></li>
         <li><a href="AES.html">AES-verschlüsselung</a></li>
-      </ul>
+    </ul>
     <div id="div1">
-        <h1 id="headline" > Der Data Encryption Standard</h1>
-        <p>Hier wird der DES grafisch dargestellt. Du kannst ein Kästchen (Bit) anklicken um es zu markieren. <br> 
-        Das kann dau dienen um herauszufinden wie sich die Bits gegenseitig beeinflussen.</p>
+        <h1 id="headline">Der Data Encryption Standard</h1>
+        <p>Hier wird der DES grafisch dargestellt. Du kannst ein Kästchen (Bit) anklicken, um es zu markieren. <br> 
+        Das kann dazu dienen, herauszufinden, wie sich die Bits gegenseitig beeinflussen.</p>
     </div>
-    <svg id="svgContainer" width="100vw" height="100vh"></svg>
-    <svg id="svgContainer1" width="100vw" height="100vh"></svg>
+    <canvas id="canvas" width="1600" height="900"></canvas>
+    <script src="DES.js"></script>
+    <script>
+        // JavaScript-Code, um auf das Canvas-Element zuzugreifen und darauf zu zeichnen
+        document.addEventListener("DOMContentLoaded", function() {
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext("2d");
+            //Hintergrund
+            let xxx = canvas.getContext("2d");
+            let y = 50;
+            let x = 50;
+            function animate() {
+                // Vorherigen Inhalt des Canvas löschen
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                xxx.fillStyle = "grey";
+                xxx.fillRect(0, 0, 900, 400);
+                ctx.fillStyle= "red";
+                ctx.fillRect(x, y, 20, 20);
+                ctx.font = "10px Arial"; // Schriftgröße und -art festlegen
+                ctx.fillStyle = "black";
+                ctx.fillText("1", x + 5, y + 12); // Text "123" bei (x + 5, y + 15) zeichnen
 
-    <script>
-    function aendereFarbe(index,farbe){
-        if (gesamt[index].farbe !== farbe)
-       { gesamt[index].farbe = farbe;}
-       else {gesamt[index].farbe = "white";}
-       document.getElementById("svgContainer").children[index * 2].setAttribute("fill", gesamt[index].farbe);
-       if (document.getElementById("svgContainer").children[index * 2 + 1].textContent == "0") {
-        document.getElementById("svgContainer").children[index * 2 + 1].textContent = "1";
-        binArray[index] = 1;
-    } else {
-        document.getElementById("svgContainer").children[index * 2 + 1].textContent = "0";
-        binArray[index] = 0;
-    }   
-    }
-        
-   
-    </script>
-    <button id ="erster_button" onClick="buttendrücken()">Weiter</button>
-    <input type="text" id="meinInput" name="meinInput" placeholder="Bitte die Eingangsbits eingeben.">
-    <script>
-    var Eingang = document.getElementById("meinInput");
-    function eingabe() {
-    var Klartext = Eingang.value;
-    Eingabe_zu_bin(Klartext)
-    document.getElementById("erster_button").style.display = "block";
-    zeichneRechtecke(200, 20,gesamt,binArray); }
-    Eingang.addEventListener("keypress", function(event){if (event.key == "Enter"){eingabe();}});
-    
-  </script>
-    <script>
-    function buttendrücken()
-    {
-        buttonClicked();
-        document.getElementById("erster_button").style.display = "none";
-    }
+                // y-Koordinate inkrementieren (um das Rechteck nach unten laufen zu lassen)
+                y += 0.5;
+                // Überprüfen, ob das Rechteck den unteren Rand des Canvas erreicht hat
+                if (y <= canvas.height - 20) {
+                    requestAnimationFrame(animate); // Animation fortsetzen
+                }
+            }
+
+            animate(); // Animation starten
+        });
     </script>
 </body>
 </html>
