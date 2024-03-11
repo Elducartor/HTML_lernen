@@ -16,10 +16,22 @@
         <p>Hier wird der DES grafisch dargestellt. Du kannst ein Kästchen (Bit) anklicken, um es zu markieren. <br> 
         Das kann dazu dienen, herauszufinden, wie sich die Bits gegenseitig beeinflussen.</p>
     </div>
-    <canvas id="canvas" width="1600" height="900"></canvas>
+    <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
+    <input type="text" id="meinInput" name="meinInput" placeholder="Hier bitte 16 Hexzahlen eingeben(64 Bit)">
+    <canvas id="canvas" width="1000" height="100"></canvas>
     <script src="DES.js"></script>
     <script>
-        Zeichnen(10,10);
+        document.addEventListener("DOMContentLoaded", function() {
+            function handleKeyPress(event) {
+                if (event.key === "Enter") {
+                    var Eingabe = document.getElementById("meinInput").value;
+                    Zeichnen(20,20,Eingabe);
+                }
+            }
+            // Das Texteingabefeld überwachen, um auf Tastatureingaben zu reagieren
+            document.getElementById("meinInput").addEventListener("keyup", handleKeyPress);
+        });
     </script>
+   
 </body>
 </html>

@@ -40,27 +40,22 @@ li a:hover:not(.aktiv)
   padding: 10px 10px;
   height: 100%;
 }
-
 #erster_button
 {
-  margin-top: 10px;
+  margin-left: 20%;
   background-color: #034d10;
   color: #ffffff;
-  top: 280px;
-  left: 350px;
-  display:none;
-  position: absolute;
+  display: flex;
 }
 
 #meinInput
 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  position: absolute;
-  top: 150px;
-  left: 350px;
+  margin-left: 20%;
+  display: flex;
 }
 #canvas
 {
+  background-color: #034d10;
+  margin-top: 1%;
   margin-left: 12%;
 }

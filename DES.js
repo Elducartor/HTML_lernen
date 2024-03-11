@@ -5,79 +5,111 @@ funktion erstellen die rechtecke erstellt. (SVG)
 die Kästchen mit einer for schleife zeichnen lassen
 
 */
+let rectangles = [];
 function drawRectangles(ctx, rects) {
     for (let rect of rects) {
         ctx.fillStyle = rect.color;
         ctx.fillRect(rect.x,rect.y,rect.width,rect.height);
+        ctx.fillStyle = rect.bitcolor
+        ctx.fillText(rect.bit,rect.x +10, rect.y +10);
     }
 }
 
-function RechteckWerte(i,widthx,heighty){
+function RechteckWerte(i,widthx,heighty,text){
         let x = i* (widthx + 5);
         let y = heighty;
         if (i >= 32)
-        {y = 40;
+        {y = heighty * 2 + 20;
         x = (i-32) *(widthx + 5);
         }
        
         let width = widthx;
         let height = heighty;
         let color = "white";
-
-        return {x,y,width,height,color};
+        let bit = text[i];
+        let bitcolor = "black";
+        return {x,y,width,height,color,bit,bitcolor};
 }
 
-function RechteckeBauen(anzahl,widthx,heighty){
+function RechteckeBauen(anzahl,widthx,heighty,text){
     let RechteckArray = [];
     for (let i = 0; i < anzahl;i++)
     { 
-        RechteckArray.push(RechteckWerte(i,widthx,heighty))
+        RechteckArray.push(RechteckWerte(i,widthx,heighty,text));
     }
     return RechteckArray;
 }
 
-function Zeichnen(widthx,heighty){
-    document.addEventListener("DOMContentLoaded",function() {
+function Zeichnen(widthx,heighty,text){
+    text = hexToBin(text);
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
 
-    let rectangles = RechteckeBauen(64,10,10);
+    rectangles = RechteckeBauen(64,widthx,heighty,text);
     drawRectangles(ctx,rectangles);
-    console.log(drawRectangles(ctx,rectangles));
-
-});
 }
-function XXX() {
-    // JavaScript-Code, um auf das Canvas-Element zuzugreifen und darauf zu zeichnen
-    document.addEventListener("DOMContentLoaded", function() {
-        let canvas = document.getElementById("canvas");
-        let ctx = canvas.getContext("2d");
-        //Hintergrund
-        let xxx = canvas.getContext("2d");
-        let y = 50;
-        let x = 50;
-        function animate() {
-            // Vorherigen Inhalt des Canvas löschen
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            xxx.fillStyle = "grey";
-            xxx.fillRect(0, 0, 900, 400);
-            ctx.fillStyle= "red";
-            ctx.fillRect(x, y, 20, 20);
-            ctx.font = "10px Arial"; // Schriftgröße und -art festlegen
-            ctx.fillStyle = "black";
-            ctx.fillText("1", x + 5, y + 12); // Text "123" bei (x + 5, y + 15) zeichnen
-
-            // y-Koordinate inkrementieren (um das Rechteck nach unten laufen zu lassen)
-            y += 0.5;
-            // Überprüfen, ob das Rechteck den unteren Rand des Canvas erreicht hat
-            if (y <= canvas.height - 20) {
-                requestAnimationFrame(animate); // Animation fortsetzen
-            }
+    function hexToBin(text){
+        if (text.length < 16) {return "zu kurz"}
+        if (text.length > 16) {return "zu lang"}
+        let Eingabe_bits = "";
+        var Hexzahlen = {
+            "0": "0000",
+            "1": "0001",
+            "2": "0010",
+            "3": "0011",
+            "4": "0100",
+            "5": "0101",
+            "6": "0110",
+            "7": "0111",
+            "8": "1000",
+            "9": "1001",
+            "A": "1010",
+            "a": "1010",
+            "B": "1011",
+            "b": "1011",
+            "C": "1100",
+            "c": "1100",
+            "D": "1101",
+            "d": "1101",
+            "E": "1110",
+            "e": "1110",
+            "F": "1111",
+            "f": "1111"
         }
+    
+    for (i = 0; i < text.length; i++)
+    {
+      if (text[i] in Hexzahlen){
+        Eingabe_bits += Hexzahlen[text[i]]; 
+      }
+      else { window.alert("Blöd?");}
+    }
 
-        animate(); // Animation starten
-    });
+    return Eingabe_bits;
+}
+// Eventlistener für Klickereignisse auf dem Canvas hinzufügen
+canvas.addEventListener('click', function(event) {
+    let canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    // Mausposition relativ zum Canvas ermitteln
+    var mouseX = event.clientX - canvas.getBoundingClientRect().left;
+    var mouseY = event.clientY - canvas.getBoundingClientRect().top;
+    // Überprüfen, ob das geklickte Rechteck getroffen wurde
+    for (let rect of rectangles) {
+        if (mouseX >= rect.x && mouseX <= (rect.x + rect.width) &&
+            mouseY >= rect.y && mouseY <= (rect.y + rect.height)) {
+            // Farbe des Rechtecks ändern (z. B. von "white" auf "red")
+            rect.color = "red";
+            // Canvas neu zeichnen, um die Änderung anzuzeigen
+            drawRectangles(ctx, rectangles);
+            break; // Schleife beenden, da nur ein Rechteck geändert werden soll
+        }
+    }
+    console.log(rectangles);
+});
 
+    function buttonClicked()
+    {
     }
 // Kommt nach dem EIngang vor der ersten Runde.
 Eingangspermutation = [
