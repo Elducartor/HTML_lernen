@@ -16,9 +16,8 @@
         <p>Hier wird der DES grafisch dargestellt. Du kannst ein Kästchen (Bit) anklicken, um es zu markieren. <br> 
         Das kann dazu dienen, herauszufinden, wie sich die Bits gegenseitig beeinflussen.</p>
     </div>
-    <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
     <input type="text" id="meinInput" name="meinInput" placeholder="Hier bitte 16 Hexzahlen eingeben(64 Bit)">
-    <canvas id="canvas" width="1000" height="100"></canvas>
+    <canvas id="canvas" width="850" height="100"></canvas>
     <script src="DES.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -32,6 +31,8 @@
             document.getElementById("meinInput").addEventListener("keyup", handleKeyPress);
         });
     </script>
-   
+    <p id="P1"> Nun Permutieren wir den Eingang mit der Eingangspermutation. Bitte auf Weiter klicken.</p>
+    <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
+    <canvas id="canvas1" width="850" height="100"></canvas>
 </body>
 </html>

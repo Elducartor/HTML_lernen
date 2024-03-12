@@ -77,7 +77,7 @@ function Zeichnen(widthx,heighty,text){
             "f": "1111"
         }
     
-    for (i = 0; i < text.length; i++)
+    for (let i = 0; i < text.length; i++)
     {
       if (text[i] in Hexzahlen){
         Eingabe_bits += Hexzahlen[text[i]]; 
@@ -105,12 +105,52 @@ canvas.addEventListener('click', function(event) {
             break; // Schleife beenden, da nur ein Rechteck geändert werden soll
         }
     }
-    console.log(rectangles);
 });
 
-    function buttonClicked()
-    {
+async function buttonClicked() {
+    let canvas1 = document.getElementById("canvas1");
+    let ctx1 = canvas1.getContext("2d");
+    let fertig_animiert = [];
+    Animationsarray = JSON.parse(JSON.stringify(rectangles));
+    for (let i = 0; i < 64; i++) {
+        let index = Eingangspermutation[i];
+        let a = rectangles[index].x;
+        let b = Animationsarray[i].x;
+        let c = rectangles[index].y;
+        let d = Animationsarray[i].y;
+        console.log(rectangles);
+        while (a != b || c != d) {
+            ctx1.clearRect(rectangles[index].x, rectangles[index].y, rectangles[index].width, rectangles[index].height);
+            
+            if (a < b) a += 5;
+            if (c < d) c += 5;
+            if (a > b) a -= 5;
+            if (c > d) c -= 5;
+
+            rectangles[index].x = a;
+            rectangles[index].y = c;
+
+            ctx1.fillStyle = rectangles[index].color;
+            ctx1.fillRect(rectangles[index].x, rectangles[index].y, rectangles[index].width, rectangles[index].height);
+            ctx1.fillStyle = rectangles[index].bitcolor;
+            ctx1.fillText(rectangles[index].bit, rectangles[index].x + 10, rectangles[index].y + 10);
+            await new Promise(resolve => setTimeout(resolve,20));
+            
+            if ( fertig_animiert.length >= 1)
+            {for (let x = 0; x < fertig_animiert.length; x++) {
+                ctx1.fillStyle = fertig_animiert[x].color;
+                ctx1.fillRect(fertig_animiert[x].x, fertig_animiert[x].y, fertig_animiert[x].width, fertig_animiert[x].height);
+                ctx1.fillStyle = fertig_animiert[x].bitcolor;
+                ctx1.fillText(fertig_animiert[x].bit, fertig_animiert[x].x + 10, fertig_animiert[x].y + 10);
+                }
+            }
+        }
+        fertig_animiert.push(rectangles[index]);
     }
+}
+       
+    
+
 // Kommt nach dem EIngang vor der ersten Runde.
 Eingangspermutation = [
     57,49,41,33,25,17,9,1,
