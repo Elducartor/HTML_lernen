@@ -1,6 +1,8 @@
- let key = "1100101101001110101011001011100100111110100000000001110101010111";
+var key = "1100101101001110101011001011100100111110100000000001110101010111";
 let C = "";
 let D = "";
+let shifted_C = "";
+let shifted_D = "";
 //schlüsselfahrplan
 //Rausfiltern der Paritätsbits.
 var PC_1 = 
@@ -32,21 +34,36 @@ function Schluesselkuerzen(key)
     }
     return key_new;
     }
+key = Schluesselkuerzen(key);
+console.log("startkey: " + key);
 
-function Rundenschlüssel()
-{
-    if (Rundenzähler in zweistep)
+function Rundenschlüsselberechnen(key)
+{   
+    console.log(Rundenzähler);
+    if (zweistep.includes(Rundenzähler))
     {
-        let shifted = Schluesselkuerzen(key).slice(2) + Schluesselkuerzen(key).slice(0,2);
-        C = shifted.slice(0,28)
-        D = shifted.slice(28);
+        C = key.slice(0,28);
+        D = key.slice(28);
+        shifted_C = C.slice(1) + C.slice(0,1);
+        shifted_D = D.slice(1) + D.slice(0,1);
     }
-    if (Rundenzähler in einstep)
+    if (einstep.includes(Rundenzähler))
     {
-        let shifted = Schluesselkuerzen(key).slice(1) + Schluesselkuerzen(key).slice(0,1);
-        C = shifted.slice(0,28)
-        D = shifted.slice(28);
+        
+        C = key.slice(0,28);
+        D = key.slice(28);
+        shifted_C = C.slice(2) + C.slice(0,2);
+        shifted_D = D.slice(2) + D.slice(0,2);
     }
     Rundenzähler++;
+    key = shifted_C + shifted_D;
+    let Roundkey ="";
+    let Rundenschlüsselpermu = C + D;
+    for (let i = 0;i < PC_2.length;i++)
+    {
+        let x = Rundenschlüsselpermu[PC_2[i]];
+        Roundkey = Roundkey + x;
+    }
+    return Roundkey;
 }
-Rundenschlüssel(key);
+
