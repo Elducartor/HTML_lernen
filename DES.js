@@ -7,6 +7,8 @@ die Kästchen mit einer for schleife zeichnen lassen
 */
 let rectangles = [];
 let LundR0 = [];
+let L = [];
+let R = [];
 function drawRectangles(ctx, rects) {
     for (let rect of rects) {
         ctx.fillStyle = rect.color;
@@ -16,7 +18,7 @@ function drawRectangles(ctx, rects) {
     }
 }
 
-function RechteckWerte(i,widthx,heighty,text){
+function RechteckWerte(i,widthx,heighty,text,farbe){
         let x = i* (widthx + 5);
         let y = heighty;
         if (i >= 32)
@@ -26,27 +28,27 @@ function RechteckWerte(i,widthx,heighty,text){
        
         let width = widthx;
         let height = heighty;
-        let color = "white";
+        let color = farbe;
         let bit = text[i];
         let bitcolor = "black";
         return {x,y,width,height,color,bit,bitcolor};
 }
 
-function RechteckeBauen(anzahl,widthx,heighty,text){
+function RechteckeBauen(anzahl,widthx,heighty,text,farbe){
     let RechteckArray = [];
     for (let i = 0; i < anzahl;i++)
     { 
-        RechteckArray.push(RechteckWerte(i,widthx,heighty,text));
+        RechteckArray.push(RechteckWerte(i,widthx,heighty,text,farbe));
     }
     return RechteckArray;
 }
 
-function Zeichnen(widthx,heighty,text){
+function Zeichnen(widthx,heighty,text,farbe){
     text = hexToBin(text);
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext("2d");
 
-    rectangles = RechteckeBauen(64,widthx,heighty,text);
+    rectangles = RechteckeBauen(64,widthx,heighty,text,farbe);
     drawRectangles(ctx,rectangles);
 }
     function hexToBin(text){
@@ -119,7 +121,6 @@ async function buttonClicked() {
         let b = Animationsarray[i].x;
         let c = rectangles[index].y;
         let d = Animationsarray[i].y;
-        console.log(rectangles);
         while (a != b || c != d) {
             ctx1.clearRect(rectangles[index].x, rectangles[index].y, rectangles[index].width, rectangles[index].height);
             
@@ -135,8 +136,7 @@ async function buttonClicked() {
             ctx1.fillRect(rectangles[index].x, rectangles[index].y, rectangles[index].width, rectangles[index].height);
             ctx1.fillStyle = rectangles[index].bitcolor;
             ctx1.fillText(rectangles[index].bit, rectangles[index].x + 10, rectangles[index].y + 10);
-            await new Promise(resolve => setTimeout(resolve,20));
-            
+            await new Promise(resolve => setTimeout(resolve,1)); // Geschwindigkeit
             if ( fertig_animiert.length >= 1)
             {for (let x = 0; x < fertig_animiert.length; x++) {
                 ctx1.fillStyle = fertig_animiert[x].color;
@@ -148,20 +148,41 @@ async function buttonClicked() {
         }
         fertig_animiert.push(rectangles[index]);
     }
-    let L0 = fertig_animiert.slice(0,32);
-    let R0 = fertig_animiert.slice(32);
-    LundR0.push(L0);
-    LundR0.push(R0);
+    for (let x = 0; x < fertig_animiert.length;x++)
+    {
+        if ( x < 32)
+        {L.push(fertig_animiert[x].bit);}
+        if (x >= 32)
+        {R.push(fertig_animiert[x].bit);}
+    }
+    LundR0.push(L);
+    LundR0.push(R);
 }
 
-function fBox(Array)
+function fBox(Array,key1)
 {
-    let R_new = [];
-    for ( let i; i < 48;i++)
+    let y = "";
+    let next_L ="";
+    let R_new = "";
+    console.log("Das ist Array= " + Array.length);
+    for ( let i = 0; i < Expansion.length;i++)
     {
-        R_new.push(Array[Expansion[i]-1]);
+        R_new += Array[Expansion[i]-1];
     }
+    let abgleich =  Rundenschlüsselberechnen(key1);
+
+    for ( let x = 0; x < R_new.length;x++)
+    {
+        console.log(Rundenschlüsselberechnen(key1)[x]);
+        console.log(R_new[x]);
+        if (R_new[x]=== abgleich[x]) {y = "0"} 
+        else {y = "1"};
+        next_L += y;
+    }
+
+    console.log(next_L);
 }
+
  //für die f-funktion
  var P_permutation = 
  [

@@ -16,7 +16,8 @@
         <p>Hier wird der DES grafisch dargestellt. Du kannst ein Kästchen (Bit) anklicken, um es zu markieren. <br> 
         Das kann dazu dienen, herauszufinden, wie sich die Bits gegenseitig beeinflussen.</p>
     </div>
-    <input type="text" id="meinInput" name="meinInput" placeholder="Hier bitte 16 Hexzahlen eingeben(64 Bit)">
+    <input type="text" id="meinInput" name="meinInput" size="40" maxlength="16" placeholder="Hier bitte den Eingang als  16 Hexzahlen eingeben(64 Bit)">
+    <input type="text" id="key_input" name="key_input" size="40" maxlength="16" placeholder="Hier bitte den Schlüssel als 16 Hexzahlen eingeben(64 Bit)">
     <canvas id="canvas" width="850" height="100"></canvas>
     <script src="DES.js"></script>
     <script>
@@ -24,7 +25,7 @@
             function handleKeyPress(event) {
                 if (event.key === "Enter") {
                     var Eingabe = document.getElementById("meinInput").value;
-                    Zeichnen(20,20,Eingabe);
+                    Zeichnen(20,20,Eingabe,"white");
                 }
             }
             // Das Texteingabefeld überwachen, um auf Tastatureingaben zu reagieren
@@ -34,5 +35,18 @@
     <p id="P1"> Nun Permutieren wir den Eingang mit der Eingangspermutation. Bitte auf Weiter klicken.</p>
     <button id ="erster_button" onClick="buttonClicked()">Weiter</button>
     <canvas id="canvas1" width="850" height="100"></canvas>
+    <script src="Schlüsselfahrplan.js"></script>
+     <script>
+        function handleKeyPress2(event)
+        {
+            if (event.key ==="Enter")
+            {
+                let key1 = hexToBin(document.getElementById("key_input").value);
+                key1 = Schluesselkuerzen(key1);
+                fBox(LundR0[1],key1);
+            }
+        }
+        document.getElementById("key_input").addEventListener("keyup", handleKeyPress2);
+    </script>
 </body>
 </html>

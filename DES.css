@@ -53,6 +53,12 @@ li a:hover:not(.aktiv)
   margin-left: 20%;
   display: flex;
 }
+#key_input
+{
+  margin-top: 2%;
+  margin-left: 20%;
+  display: flex;
+}
 #canvas
 {
   background-color: #034d10;
