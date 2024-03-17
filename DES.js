@@ -5,8 +5,9 @@ funktion erstellen die rechtecke erstellt. (SVG)
 die Kästchen mit einer for schleife zeichnen lassen
 
 */
+let R_für_Expan = [];
 let rectangles = [];
-let LundR0 = [];
+let LundR = [];
 let L = [];
 let R = [];
 function drawRectangles(ctx, rects) {
@@ -42,7 +43,28 @@ function RechteckeBauen(anzahl,widthx,heighty,text,farbe){
     }
     return RechteckArray;
 }
+function Expansion_zeichnen(Array){
+    console.log("expansions_array " + Array[0].x);
+    let canvas2 = document.getElementById("canvas2");
+    expand_bits = canvas2.getContext("2d");
+    for (let bits of Array) {
+        bits.y = 20;
+        expand_bits.fillStyle = bits.color;
+        expand_bits.fillRect(bits.x,bits.y,bits.width,bits.height);
+        expand_bits.fillStyle = bits.bitcolor
+        expand_bits.fillText(bits.bit,bits.x +10, bits.y +10);
+    }
+    for ( let i = 0; i < Expansion.length;i++)
+    {   
+        let bitis = Array[Expansion[i]-1];
+        bitis.x =   i * (bitis.width+5);
+        expand_bits.fillStyle = bitis.color;
+        expand_bits.fillRect(bitis.x,60,bitis.width,bitis.height);
+        expand_bits.fillStyle = bitis.bitcolor
+        expand_bits.fillText(bitis.bit,bitis.x +10, 70);
 
+    }
+}
 function Zeichnen(widthx,heighty,text,farbe){
     text = hexToBin(text);
     let canvas = document.getElementById("canvas");
@@ -52,8 +74,6 @@ function Zeichnen(widthx,heighty,text,farbe){
     drawRectangles(ctx,rectangles);
 }
     function hexToBin(text){
-        if (text.length < 16) {return "zu kurz"}
-        if (text.length > 16) {return "zu lang"}
         let Eingabe_bits = "";
         var Hexzahlen = {
             "0": "0000",
@@ -85,7 +105,7 @@ function Zeichnen(widthx,heighty,text,farbe){
       if (text[i] in Hexzahlen){
         Eingabe_bits += Hexzahlen[text[i]]; 
       }
-      else { window.alert("Blöd?");}
+      else { window.alert("Keine Hexzahl, hexzalen sind z.b.: '0-9','A-F' - Einzeln, also 'A' oder '9' ");}
     }
 
     return Eingabe_bits;
@@ -102,10 +122,11 @@ canvas.addEventListener('click', function(event) {
         if (mouseX >= rect.x && mouseX <= (rect.x + rect.width) &&
             mouseY >= rect.y && mouseY <= (rect.y + rect.height)) {
             // Farbe des Rechtecks ändern (z. B. von "white" auf "red")
-            rect.color = "red";
+            rect.color = "red"
             // Canvas neu zeichnen, um die Änderung anzuzeigen
             drawRectangles(ctx, rectangles);
             break; // Schleife beenden, da nur ein Rechteck geändert werden soll
+            
         }
     }
 });
@@ -153,12 +174,13 @@ async function buttonClicked() {
         if ( x < 32)
         {L.push(fertig_animiert[x].bit);}
         if (x >= 32)
-        {R.push(fertig_animiert[x].bit);}
+        {R.push(fertig_animiert[x].bit);
+        R_für_Expan.push(fertig_animiert[x]);}
     }
-    LundR0.push(L);
-    LundR0.push(R);
+    LundR.push(L);
+    LundR.push(R);
+    console.log(R_für_Expan);
 }
-
 function fBox(Array,key1)
 {
     let y = "";
@@ -169,8 +191,8 @@ function fBox(Array,key1)
     {
         R_new += Array[Expansion[i]-1];
     }
+    Expansion_zeichnen(R_für_Expan);
     let abgleich =  Rundenschlüsselberechnen(key1);
-
     for ( let x = 0; x < R_new.length;x++)
     {
 
@@ -303,9 +325,6 @@ function Sboxenauslesen(Array)
             let Sboxindexstart = (Array[i][0]*2 + Array[i][5]*1);
             let Sboxindexbits = Array[i][1] + Array[i][2] + Array[i][3] + Array[i][4];
             let sboxindex = parseInt(Sboxindexbits,2);
-            console.log("Sboxenindexstart: " + Sboxindexstart);
-            console.log("Sboxenindexbits:" + Sboxindexbits);
-            console.log("die 4 Bits ergeben :" + sboxindex);
             if (i == 0)  {new_Runden_L += sbox1[Sboxindexstart][sboxindex];}
             if ( i == 1) {new_Runden_L += sbox2[Sboxindexstart][sboxindex];}
             if ( i == 2) {new_Runden_L += sbox3[Sboxindexstart][sboxindex];}
@@ -322,6 +341,7 @@ function Sboxenauslesen(Array)
 function DezinBin(String)
 {
     let entgültiger_output = "";
+    let entgültiger_output_für_P_Perm = "";
     var DezZahlen = 
     {
         "00": "0000",
@@ -346,9 +366,16 @@ function DezinBin(String)
         {
             if (String[i] + String[i+1] in DezZahlen)
             {
-                entgültiger_output += DezZahlen[String[i] + String[i+1]]
+                //entgültiger_output += DezZahlen[String[i] + String[i+1]];
+                entgültiger_output_für_P_Perm += DezZahlen[String[i] + String[i+1]];
             }
         
         }   
-    return entgültiger_output;
+    console.log(entgültiger_output_für_P_Perm);
+    console.log(entgültiger_output_für_P_Perm.length);
+    for (let y = 0;y < entgültiger_output_für_P_Perm.length;y++)
+    {
+        entgültiger_output += entgültiger_output_für_P_Perm[P_permutation[y]];
+    }
+    return  "Nach P-Perm" + entgültiger_output;
     }

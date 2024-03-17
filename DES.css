@@ -71,6 +71,12 @@ li a:hover:not(.aktiv)
   margin-top: 1%;
   margin-left: 12%;
 }
+#canvas2
+{
+  background-color: #034d10;
+  margin-top: 1%;
+  margin-left: 12%;
+}
 #P1 
 {
   margin-left: 12%;

@@ -37,16 +37,21 @@
     <canvas id="canvas1" width="850" height="100"></canvas>
     <script src="Schlüsselfahrplan.js"></script>
      <script>
+        document.addEventListener("DOMContentLoaded", function() {
         function handleKeyPress2(event)
         {
             if (event.key ==="Enter")
             {
                 let key1 = hexToBin(document.getElementById("key_input").value);
                 key1 = Schluesselkuerzen(key1);
-                console.log(fBox(LundR0[1],key1));
+                console.log(fBox(LundR[1],key1));
             }
         }
         document.getElementById("key_input").addEventListener("keyup", handleKeyPress2);
+    });
     </script>
+    <p id="P1"> Nach der Eingangspermutation kommt nun die f-box/f-funktion. Dafür müssen wir die rechte Seite expandieren.</p>
+     <canvas id="canvas2" width="1400" height="100"></canvas>
+   
 </body>
 </html>
