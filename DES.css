@@ -81,3 +81,11 @@ li a:hover:not(.aktiv)
 {
   margin-left: 12%;
 }
+
+#Expan-bild{
+  position: relative;
+  width: 550px;
+  height:300px;
+  border: 1px;
+  left: 50%;
+}
